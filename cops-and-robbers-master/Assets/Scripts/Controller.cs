@@ -66,7 +66,42 @@ public class Controller : MonoBehaviour
 
         //TODO: Rellenar la lista "adjacency" de cada casilla con los índices de sus casillas adyacentes
 
-    }
+        
+        int t = 0;
+        for (int x = 0; x < Constants.NumTiles; x++)
+        {
+            for (int c = 0; c < Constants.NumTiles; c++)
+            {
+
+                if (c > Constants.NumTiles || c < 0)
+                {
+                }
+                else if (c == x + 1 || c == x - 1 || c == x + 8 || c == x - 8)
+                {
+                    matriu[x, c] = 1;
+                    tiles[x].adjacency.Add(c);
+                }
+
+                int x2 = x + 1;
+                if (x2 % 8 == 0 && x != 0 && x2 < Constants.NumTiles)
+                {
+                    tiles[x].adjacency.Remove(x2);
+                    matriu[x, x2] = 0;
+                }
+
+                int x3 = x - 1;
+                if (x % 8 == 0 && x != 0)
+                {
+                    tiles[x].adjacency.Remove(x - 1);
+                    matriu[x, x - 1] = 0;
+                }
+
+
+                t++;
+            }
+        }
+
+    }// InitAdjacencyLists()
 
     //Reseteamos cada casilla: color, padre, distancia y visitada
     public void ResetTiles()
