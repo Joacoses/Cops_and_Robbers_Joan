@@ -20,7 +20,9 @@ public class Controller : MonoBehaviour
     private int state;
     private int clickedTile = -1;
     private int clickedCop = 0;
-                    
+    //lista casillas ladron
+    List<int> casillasRobber = new List<int>();
+
     void Start()
     {        
         InitTiles();
@@ -189,6 +191,21 @@ public class Controller : MonoBehaviour
         - Movemos al caco a esa casilla
         - Actualizamos la variable currentTile del caco a la nueva casilla
         */
+        for (int i = 0; i < casillasRobber.Count; i++)
+        {
+            Debug.Log(casillasRobber[i]);
+        }
+
+        System.Random ran = new System.Random();
+
+        int num = ran.Next(casillasRobber.Count);
+        int randomList = casillasRobber[num];
+
+        Debug.Log("Random number --> " + randomList);
+
+        robber.GetComponent<RobberMove>().currentTile = randomList;
+
+
         robber.GetComponent<RobberMove>().MoveToTile(tiles[robber.GetComponent<RobberMove>().currentTile]);
     }
 
